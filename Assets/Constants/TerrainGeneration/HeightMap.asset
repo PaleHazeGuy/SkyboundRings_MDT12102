@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95b6f76eab1eb1f34ac5f758d35bb906, type: 3}
+  m_Name: HeightMap
+  m_EditorClassIdentifier: 
+  autoUpdate: 1
+  noiseSettings:
+    normalizeMode: 1
+    scale: 50
+    octaves: 20
+    persistance: 0.622
+    lacunarity: 1.85
+    seed: 0
+    offset: {x: 0, y: 0}
+  useFalloff: 1
+  heightMultiplier: 133
+  heightCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.027572632
+      value: -0.0670166
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.1971801
+      value: -0.015302807
+      inSlope: 0.7605935
+      outSlope: 0.7605935
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.43396175
+      value: 0.5425732
+      inSlope: 1.0396098
+      outSlope: 1.0396098
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.6208772
+      value: 0.7154082
+      inSlope: 1.4428902
+      outSlope: 1.4428902
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.88185865
+      value: 0.7004703
+      inSlope: 1.0174799
+      outSlope: 1.0174799
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9764404
+      value: 0.41104507
+      inSlope: -0.8964234
+      outSlope: -0.8964234
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

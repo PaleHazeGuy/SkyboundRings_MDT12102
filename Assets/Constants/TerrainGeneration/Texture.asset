@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 700260123b16c469788e6ddeb32e36e7, type: 3}
+  m_Name: Texture
+  m_EditorClassIdentifier: 
+  autoUpdate: 1
+  layers:
+  - name: Water
+    color: {r: 0.11372549, g: 0.32156864, b: 0.47058824, a: 0}
+    startHeight: 0
+    blendStrength: 0
+    colorStrength: 1
+    texture: {fileID: 0}
+    textureScale: 1
+  - name: Sand
+    color: {r: 0.78039217, g: 0.75686276, b: 0.43529412, a: 0}
+    startHeight: 0.38
+    blendStrength: 0
+    colorStrength: 1
+    texture: {fileID: 0}
+    textureScale: 1
+  - name: Grass
+    color: {r: 0.25882354, g: 0.42745098, b: 0.12156863, a: 0}
+    startHeight: 0.088
+    blendStrength: 0
+    colorStrength: 1
+    texture: {fileID: 0}
+    textureScale: 1
+  - name: Ground
+    color: {r: 0.40392157, g: 0.34901962, b: 0.20392157, a: 0}
+    startHeight: 0.176
+    blendStrength: 0
+    colorStrength: 1
+    texture: {fileID: 0}
+    textureScale: 1
+  - name: Ground2
+    color: {r: 0.59607846, g: 0.41568628, b: 0.18431373, a: 0}
+    startHeight: 0.343
+    blendStrength: 0.327
+    colorStrength: 1
+    texture: {fileID: 0}
+    textureScale: 1
+  - name: Snow
+    color: {r: 1, g: 1, b: 1, a: 0}
+    startHeight: 0.941
+    blendStrength: 0.233
+    colorStrength: 1
+    texture: {fileID: 0}
+    textureScale: 1
