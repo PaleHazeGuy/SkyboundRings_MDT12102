@@ -22,13 +22,14 @@ namespace Types.TerrainGeneration
 
     public TerrainLayer[] layers;
 
-    protected override void OnValidate()
+    public new void OnValidate()
     {
       if (layers == null) return;
       if (layers.Length > maxLayerCount)
       {
         System.Array.Resize(ref layers, maxLayerCount);
       }
+
       base.OnValidate();
     }
 
@@ -66,7 +67,7 @@ namespace Types.TerrainGeneration
         textureSize = validTexture.width;
       }
 
-      Texture2DArray textureArray = new Texture2DArray(textureSize, textureSize, maxLayerCount, TextureFormat.RGBA32, true);
+      UnityEngine.Texture2DArray textureArray = new UnityEngine.Texture2DArray(textureSize, textureSize, maxLayerCount, TextureFormat.RGBA32, true);
 
       for (int i = 0; i < maxLayerCount; i++)
       {
