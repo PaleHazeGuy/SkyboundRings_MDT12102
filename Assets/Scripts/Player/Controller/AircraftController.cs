@@ -64,8 +64,8 @@ namespace Player.Controller
     {
       rigid = GetComponent<Rigidbody>();
       rigid.useGravity = false;
-      rigid.drag = 0f;
-      rigid.angularDrag = 2f;
+      rigid.linearDamping = 0f;
+      rigid.angularDamping = 2f;
 
       if (controller == null)
         Debug.LogError(name + ": Plane - Missing reference to MouseFlightController!");
@@ -162,20 +162,20 @@ namespace Player.Controller
       if (!IsControllable)
       {
         currentAirspeed = 0f;
-        rigid.velocity = Vector3.zero;
+        rigid.linearVelocity = Vector3.zero;
         rigid.angularVelocity = Vector3.zero;
         return;
       }
 
-      currentAirspeed = rigid.velocity.magnitude;
+      currentAirspeed = rigid.linearVelocity.magnitude;
 
       if (currentAirspeed < 0.001f)
       {
-        rigid.velocity = Vector3.zero;
+        rigid.linearVelocity = Vector3.zero;
         currentAirspeed = 0f;
       }
 
-      Vector3 localVelocity = transform.InverseTransformDirection(rigid.velocity);
+      Vector3 localVelocity = transform.InverseTransformDirection(rigid.linearVelocity);
       float forwardAirflow = localVelocity.z;
 
       float engineDesiredSpeed = (hasOil) ? (throttle * maxSpeed) : 0f;
@@ -234,7 +234,7 @@ namespace Player.Controller
       {
 
         Vector3 fallVelocity = Vector3.down * 20f;
-        rigid.velocity = Vector3.Lerp(rigid.velocity, fallVelocity, 2.5f * Time.fixedDeltaTime);
+        rigid.linearVelocity = Vector3.Lerp(rigid.linearVelocity, fallVelocity, 2.5f * Time.fixedDeltaTime);
 
         rigid.AddRelativeTorque(Vector3.right * turnTorque.x * stallPitchDirection * forceMult * 0.8f, ForceMode.Force);
       }
@@ -252,7 +252,7 @@ namespace Player.Controller
           rigid.AddRelativeTorque(Vector3.right * turnTorque.x * divePitchTorque * forceMult, ForceMode.Force);
         }
 
-        rigid.velocity = Vector3.Lerp(rigid.velocity, desiredVelocityVector, gripAirBite * Time.fixedDeltaTime);
+        rigid.linearVelocity = Vector3.Lerp(rigid.linearVelocity, desiredVelocityVector, gripAirBite * Time.fixedDeltaTime);
       }
 
       float aerodynamicEffectiveness = Mathf.Clamp01(forwardAirflow / 15f);

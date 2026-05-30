@@ -44,7 +44,7 @@ namespace Visuals
 
       if (rb != null)
       {
-        airspeed = rb.velocity.magnitude;
+        airspeed = rb.linearVelocity.magnitude;
       }
 
       if (propellerTransform != null)

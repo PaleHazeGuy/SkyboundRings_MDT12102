@@ -497,7 +497,7 @@ namespace Gameplay
       {
         rb.position = spawnPos;
         rb.rotation = spawnRotation;
-        rb.velocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
       }
       else
