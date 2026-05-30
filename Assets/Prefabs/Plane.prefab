@@ -104,8 +104,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
-  maxSpeed: 80
-  engineAcceleration: 15
+  maxSpeed: 70
+  engineAcceleration: 10
   throttle: 0.5
   throttleSensitivity: 0.5
   glideBrakeRate: 2
@@ -114,7 +114,7 @@ MonoBehaviour:
   turnTorque: {x: 90, y: 25, z: 45}
   forceMult: 39.3
   hasOil: 1
-  currentOilPercent: 1
+  currentOilPercent: 0.5
   oilBurnRateTime: 300
   currentAirspeed: 0
   isStalling: 0

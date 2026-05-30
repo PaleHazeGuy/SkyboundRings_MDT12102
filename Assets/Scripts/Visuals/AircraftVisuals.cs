@@ -38,7 +38,7 @@ namespace Visuals
 
       if (planeController != null)
       {
-        engineThrustPercent = planeController.throttle;
+        engineThrustPercent = planeController.hasOil ? planeController.throttle : 0f;
         maxSpeed = planeController.maxSpeed;
       }
 

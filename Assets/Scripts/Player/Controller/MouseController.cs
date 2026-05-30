@@ -205,5 +205,18 @@ namespace Player.Controller
     {
       return Quaternion.Slerp(a, b, 1 - Mathf.Exp(-lambda * dt));
     }
+
+    public void ResetAimToAircraft()
+    {
+      if (mouseAim != null && aircraft != null)
+      {
+        mouseAim.forward = aircraft.forward;
+        if (cameraRig != null)
+        {
+          Vector3 upVec = (Mathf.Abs(mouseAim.forward.y) > 0.9f) ? aircraft.up : Vector3.up;
+          cameraRig.rotation = Quaternion.LookRotation(mouseAim.forward, upVec);
+        }
+      }
+    }
   }
 }

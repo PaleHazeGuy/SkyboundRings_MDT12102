@@ -15,7 +15,7 @@ namespace Player.Controller
     public float engineAcceleration = 15f;
 
     [Header("Throttle System")]
-    [Range(0f, 1f)] public float throttle = 0.5f;
+    [Range(0f, 1f)] public float throttle = 0.1f;
     public float throttleSensitivity = 0.5f;
 
     [Header("Aerodynamics & Gliding")]
@@ -37,6 +37,8 @@ namespace Player.Controller
     [SerializeField] private bool isStalling = false;
     [SerializeField] private float stallPitchDirection = 1f;
 
+    public float CurrentAirspeed => currentAirspeed;
+
     [Header("Autopilot")]
     public float sensitivity = 5f;
     public float aggressiveTurnAngle = 10f;
@@ -56,6 +58,8 @@ namespace Player.Controller
     private bool yawOverride = false;
     private float targetForwardSpeed = 0f;
 
+    [HideInInspector] public bool IsControllable = false;
+
     private void Awake()
     {
       rigid = GetComponent<Rigidbody>();
@@ -69,6 +73,8 @@ namespace Player.Controller
 
     private void Update()
     {
+      if (!IsControllable) return;
+
       HandleThrottleAndOil();
       HandleManualOverrides();
 
@@ -153,6 +159,14 @@ namespace Player.Controller
 
     private void FixedUpdate()
     {
+      if (!IsControllable)
+      {
+        currentAirspeed = 0f;
+        rigid.velocity = Vector3.zero;
+        rigid.angularVelocity = Vector3.zero;
+        return;
+      }
+
       currentAirspeed = rigid.velocity.magnitude;
 
       if (currentAirspeed < 0.001f)
@@ -227,6 +241,17 @@ namespace Player.Controller
       else
       {
         Vector3 desiredVelocityVector = transform.forward * targetForwardSpeed;
+
+        bool isGliding = (!hasOil || throttle <= 0.01f);
+        if (isGliding && currentAirspeed <= 25f)
+        {
+          float glideSinkRate = Mathf.InverseLerp(25f, 5f, currentAirspeed) * 20f;
+          desiredVelocityVector += Vector3.down * glideSinkRate;
+
+          float divePitchTorque = Mathf.InverseLerp(25f, 5f, currentAirspeed) * 0.4f;
+          rigid.AddRelativeTorque(Vector3.right * turnTorque.x * divePitchTorque * forceMult, ForceMode.Force);
+        }
+
         rigid.velocity = Vector3.Lerp(rigid.velocity, desiredVelocityVector, gripAirBite * Time.fixedDeltaTime);
       }
 
@@ -234,6 +259,19 @@ namespace Player.Controller
       if (isStalling) aerodynamicEffectiveness = 1.0f;
 
       rigid.AddRelativeTorque(new Vector3(turnTorque.x * pitch, turnTorque.y * yaw, -turnTorque.z * roll) * forceMult * aerodynamicEffectiveness, ForceMode.Force);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+      if (!IsControllable) return;
+
+      if (collision.gameObject.GetComponentInParent<Gameplay.Ring>() != null) return;
+
+      var manager = FindObjectOfType<Gameplay.Manager>();
+      if (manager != null)
+      {
+        manager.OnPlayerDeath();
+      }
     }
   }
 }
